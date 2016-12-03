@@ -1,0 +1,22 @@
+<p>
+  <strong>Name:</strong>
+  <%= @auction.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @auction.description %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @auction.active %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @auction.end_time %>
+</p>
+
+<%= link_to 'Edit', edit_auction_path(@auction) %> |
+<%= link_to 'Back', auctions_path %>

@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :auctions
   #are handled by sorcery, so these routes should not be accessible
   #get 'user_sessions/new'
   #get 'user_sessions/create'
-  #get 'user_sessions/destroy'
+  #get 'user_sessions/destroy' #or are they included in resources :user_sessions ?
 
   #get route for welcome_page
   get 'welcome_page/welcome'
