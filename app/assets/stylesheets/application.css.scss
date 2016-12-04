@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+
+// Example using 'Cerulean' bootswatch
+
+//Import bootstrap-sprockets
+@import "bootstrap-sprockets";
+
+// Import cerulean variables
+@import "bootswatch/cerulean/variables";
+
+// Then bootstrap itself
+@import "bootstrap";
+
+/*adds a padding so the navbar doesnt overlap.
+*/
+body {
+  padding-top: 60px;
+}
+/*same for responsive bootstrap
+*/
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+  }
+}
+
+// And finally bootswatch style itself
+@import "bootswatch/cerulean/bootswatch";
+
+// Whatever application styles you have go last
+//@import "base";

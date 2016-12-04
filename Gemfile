@@ -1,5 +1,19 @@
 source 'https://rubygems.org'
 
+
+#get sass bs required for bootswatch
+gem 'bootstrap-sass', '~> 3.3.6'
+#gem 'sass-rails', '>= 3.2'
+
+#adds some variations to bs
+gem 'bootswatch-rails'
+
+#adds twitter bs gem(only used for nice helper methods)
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
+gem 'sprockets', '3.6.3' #3.7.0 produced a deprecation error
+
 gem 'sorcery'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
