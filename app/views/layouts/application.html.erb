@@ -8,21 +8,40 @@
 </head>
 <body>
 
-<div id="nav">
-  <%= link_to "Auctions", :auctions %>
-  <% if current_user %>
-      <%= link_to "Edit Profile", edit_user_path(current_user.id) %>
-      <%= link_to "Logout", :logout, method: :post %>
-  <% else %>
-      <%= link_to "Register", new_user_path %> |
-      <%= link_to "Login", :login %>
-  <% end %>
-</div>
+<%= nav_bar inverse: false, fixed: :top, brand: "Vender", brand_link: root_path, responsive: true do%>
+    <%= menu_group do %>
+        <%= menu_item "Auctions", auctions_path %>
+    <% end %>
+
+    <%= menu_group pull: :right do %>
+        <% if current_user %>
+            <%= menu_item "Edit Profile", edit_user_path(current_user.id) %>
+            <%= menu_item "Logout", logout_path, method: :post %>
+        <% else %>
+            <%= menu_item "Register", new_user_path %>
+            <%= menu_item "Login", login_path %>
+        <% end %>
+    <% end %>
+
+<% end %>
+
+
+<!--
 <div>
   <p id="notice"><%= flash[:notice] %></p>
   <p id="alert"><%= flash[:alert] %></p>
+</div>-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= bootstrap_flash %>
+      <%= yield %>
+    </div>
+    <div class="col-lg-2">
+    </div>
+  </div>
 </div>
-<%= yield %>
 
 </body>
 </html>
