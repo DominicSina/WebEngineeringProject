@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :bids
   resources :auctions
   #are handled by sorcery, so these routes should not be accessible
   #get 'user_sessions/new'

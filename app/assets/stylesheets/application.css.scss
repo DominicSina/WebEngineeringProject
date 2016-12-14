@@ -25,12 +25,12 @@
 // Then bootstrap itself
 @import "bootstrap";
 
-/*adds a padding so the navbar doesnt overlap.
+/*adds a padding so the navbar doesn't overlap.
 */
 body {
   padding-top: 80px;
 }
-/*same for responsive bootstrap, hm doesn't seem to do anything though
+/*same for responsive bootstrap, hm doesn't seem to do anything though, is it only for mobile?
 */
 @media (max-width: 979px) {
   body {
