@@ -18,5 +18,10 @@
   <%= @auction.end_time %>
 </p>
 
+<p>
+  <%= image_tag(@auction.images.first.imgur_link, width: 150)%>
+</p>
+
+<%= link_to 'Make bid', new_auction_bid_path(@auction) %> |
 <%= link_to 'Edit', edit_auction_path(@auction) %> |
 <%= link_to 'Back', auctions_path %>

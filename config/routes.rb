@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :bids
-  resources :auctions
+  resources :auctions, shallow: true do
+    resources :bids
+  end
   #are handled by sorcery, so these routes should not be accessible
   #get 'user_sessions/new'
   #get 'user_sessions/create'

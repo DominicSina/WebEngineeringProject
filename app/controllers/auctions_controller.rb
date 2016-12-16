@@ -24,15 +24,29 @@ class AuctionsController < ApplicationController
   # POST /auctions
   # POST /auctions.json
   def create
-    @auction = Auction.new(auction_params)
+    @auction = @current_user.auctions.new(auction_params)
+    @auction.active=true;
 
-    respond_to do |format|
-      if @auction.save
-        format.html { redirect_to @auction, notice: 'Auction was successfully created.' }
-        format.json { render :show, status: :created, location: @auction }
-      else
-        format.html { render :new }
-        format.json { render json: @auction.errors, status: :unprocessable_entity }
+    if params[:auction][:images]
+      params[:auction][:images].each do |uploaded_file|
+        url=ImgurClient.new.uploadImage uploaded_file
+        @auction.images.new(imgur_link: url)
+      end
+    end
+
+    if @auction.end_time <=Time.now
+      respond_to do |format|
+        format.html { redirect_to new_auction_path, alert: 'End time not valid' }
+      end
+    else
+      respond_to do |format|
+        if @auction.save
+          format.html { redirect_to @auction, notice: 'Auction was successfully created.' }
+          format.json { render :show, status: :created, location: @auction }
+        else
+          format.html { render :new }
+          format.json { render json: @auction.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

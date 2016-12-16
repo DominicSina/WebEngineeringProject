@@ -1,5 +1,6 @@
 class BidsController < ApplicationController
   before_action :set_bid, only: [:show, :edit, :update, :destroy]
+  before_action :set_auction, only: [:new, :create]
 
   # GET /bids
   # GET /bids.json
@@ -14,7 +15,7 @@ class BidsController < ApplicationController
 
   # GET /bids/new
   def new
-    @bid = Bid.new
+    @bid = @current_user.bids.new(auction: @auction)
   end
 
   # GET /bids/1/edit
@@ -24,7 +25,8 @@ class BidsController < ApplicationController
   # POST /bids
   # POST /bids.json
   def create
-    @bid = Bid.new(bid_params)
+    @bid = @current_user.bids.new(bid_params)
+    @bid.auction=@auction
 
     respond_to do |format|
       if @bid.save
@@ -65,6 +67,10 @@ class BidsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_bid
       @bid = Bid.find(params[:id])
+    end
+
+    def set_auction
+      @auction = Auction.find(params[:auction_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

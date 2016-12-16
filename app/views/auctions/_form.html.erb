@@ -22,14 +22,13 @@
   </div>
 
   <div class="field">
-    <%= f.label :active %>
-    <%= f.check_box :active %>
-  </div>
-
-  <div class="field">
     <%= f.label :end_time %>
     <%= f.datetime_select :end_time %>
   </div>
+
+
+    <%= f.file_field :images, multiple: true, help: 'You can select multiple files. Attaching images can take a very long time.' %>
+
 
   <div class="actions">
     <%= f.submit %>
