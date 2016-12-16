@@ -10,4 +10,8 @@ class Auction < ApplicationRecord
     self.active=false
     self.save
   end
+
+  def highestBid
+    self.bids.order(amount: :desc).first
+  end
 end

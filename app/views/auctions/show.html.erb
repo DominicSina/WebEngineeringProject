@@ -19,6 +19,11 @@
 </p>
 
 <p>
+  <strong>Highest bid:</strong>
+  <%= "#{@auction.highestBid.amount} by #{@auction.highestBid.user.email}" %>
+</p>
+
+<p>
   <%= image_tag(@auction.images.first.imgur_link, width: 150)%>
 </p>
 
