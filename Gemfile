@@ -14,6 +14,7 @@ gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) support
 gem "twitter-bootstrap-rails"
 gem 'sprockets', '3.6.3' #3.7.0 produced a deprecation error
 
+gem 'imgur-api' #used to store the images
 gem 'rufus-scheduler' #used to check for finished auctions once in a while
 gem 'sorcery'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
