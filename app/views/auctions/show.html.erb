@@ -1,40 +1,37 @@
-<p>
-  <strong>Name:</strong>
-  <%= @auction.name %>
-</p>
+<%- model_class = Auction -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @auction.description %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @auction.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @auction.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:active) %>:</strong></dt>
+  <dd><%= @auction.active %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:end_time) %>:</strong></dt>
+  <dd><%= @auction.end_time %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @auction.user.name %></dd>
+</dl>
 
-<p>
-  <strong>Active:</strong>
-  <%= @auction.active %>
-</p>
+<div>
+    <% if @auction.images.first!=nil %>
+        <%= image_tag(@auction.images.first.imgur_link, class: "img-responsive")%>
+    <%else%>
+        <p>no image found</p>
+    <% end %>
+</div>
 
-<p>
-  <strong>End time:</strong>
-  <%= @auction.end_time %>
-</p>
-
-<p>
-  <strong>Highest bid:</strong>
-  <% if (@auction.highestBid!=nil) %>
-      <%= "#{@auction.highestBid.amount} by #{@auction.highestBid.user.email}" %>
-  <% else %>
-    currently no bids placed
-  <%end%>
-</p>
-
-<p>
-  <% if (@auction.images.first!=nil) %>
-      <%= image_tag(@auction.images.first.imgur_link, width: 150)%>
-  <% else %>
-      Currently no images available
-  <%end%>
-</p>
-
-<%= link_to 'Make bid', new_auction_bid_path(@auction) %> |
-<%= link_to 'Edit', edit_auction_path(@auction) %> |
-<%= link_to 'Back', auctions_path %>
+<hr>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              auctions_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_auction_path(@auction), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              auction_path(@auction),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</hr>

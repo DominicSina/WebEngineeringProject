@@ -17,14 +17,16 @@ Rails.application.routes.draw do
 
   resources :bids
 
+  resources :auctions, shallow: true do
+    resources :bids
+  end
+
   resources :users, shallow: true do
     resources :auctions
     resources :bids
   end
 
-  resources :auctions, shallow: true do
-    resources :bids
-  end
+
 
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
