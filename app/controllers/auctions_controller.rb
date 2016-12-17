@@ -1,10 +1,15 @@
 class AuctionsController < ApplicationController
   before_action :set_auction, only: [:show, :edit, :update, :destroy]
+  skip_before_action :require_login, only: [:index, :show]
 
   # GET /auctions
   # GET /auctions.json
   def index
-    @auctions = Auction.all
+    if(params[:user_id])
+      @auctions = User.find(params[:user_id]).auctions
+    else
+      @auctions = Auction.all
+    end
   end
 
   # GET /auctions/1

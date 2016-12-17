@@ -11,6 +11,10 @@
 <%= nav_bar inverse: false, fixed: :top, brand: "Vender", brand_link: root_path, responsive: true do%>
     <%= menu_group do %>
         <%= menu_item "Auctions", auctions_path %>
+        <% if current_user %>
+            <%= menu_item "My Auctions", user_auctions_path(current_user.id) %>
+            <%= menu_item "My Bids", user_bids_path(current_user.id) %>
+        <% end %>
     <% end %>
 
     <%= menu_group pull: :right do %>

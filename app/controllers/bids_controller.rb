@@ -5,7 +5,7 @@ class BidsController < ApplicationController
   # GET /bids
   # GET /bids.json
   def index
-    @bids = Bid.all
+    @bids = User.find(@current_user.id).bids
   end
 
   # GET /bids/1
