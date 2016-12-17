@@ -4,7 +4,7 @@ class Auction < ApplicationRecord
   has_many :bids
 
   scope :shouldEnd, -> { where('end_time < ?', Time.now) }
-  scope :notEnded, -> { where(active: false) }
+  scope :notEnded, -> { where(active: true) }
 
   def end
     self.active=false

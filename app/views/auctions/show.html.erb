@@ -20,7 +20,11 @@
 
 <p>
   <strong>Highest bid:</strong>
-  <%= "#{@auction.highestBid.amount} by #{@auction.highestBid.user.email}" %>
+  <% if (@auction.highestBid!=nil) %>
+      <%= "#{@auction.highestBid.amount} by #{@auction.highestBid.user.email}" %>
+  <% else %>
+    currently no bids placed
+  <%end%>
 </p>
 
 <p>
