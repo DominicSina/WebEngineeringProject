@@ -30,15 +30,15 @@ class AuctionsController < ApplicationController
     if params[:auction][:images]
       params[:auction][:images].each do |uploaded_file|
         url=ImgurClient.new.uploadImage uploaded_file
-        @auction.images.new(imgur_link: url)
+        img=@auction.images.new(imgur_link: url)
       end
     end
 
-    if @auction.end_time <=Time.now
-      respond_to do |format|
-        format.html { redirect_to new_auction_path, alert: 'End time not valid' }
-      end
-    else
+    #if params[:auction][:images].length < 1
+     # respond_to do |format|
+      #  format.html { redirect_to new_auction_path, alert: 'Please upload an image' }
+      #end
+    #else
       respond_to do |format|
         if @auction.save
           format.html { redirect_to @auction, notice: 'Auction was successfully created.' }
@@ -48,12 +48,19 @@ class AuctionsController < ApplicationController
           format.json { render json: @auction.errors, status: :unprocessable_entity }
         end
       end
-    end
+    #end
   end
 
   # PATCH/PUT /auctions/1
   # PATCH/PUT /auctions/1.json
   def update
+    if params[:auction][:images]
+      params[:auction][:images].each do |uploaded_file|
+        url=ImgurClient.new.uploadImage uploaded_file
+        img=@auction.images.new(imgur_link: url)
+      end
+    end
+
     respond_to do |format|
       if @auction.update(auction_params)
         format.html { redirect_to @auction, notice: 'Auction was successfully updated.' }

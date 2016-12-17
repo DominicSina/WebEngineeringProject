@@ -2,7 +2,7 @@ class Bid < ApplicationRecord
   belongs_to :user
   belongs_to :auction
 
-  validates :auction_id, presence: true
+  validates :auction_id,:user_id, presence: true
   validates :amount, presence: true, numericality: { only_integer: true }
   validate :bigger_than_highest_bid_check
   validate :is_auction_still_active
