@@ -6,10 +6,11 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:name)%></th>
+      <th>Owner</th>
       <th><%= model_class.human_attribute_name(:active) %></th>
       <th><%= model_class.human_attribute_name(:end_time) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th>Highest Bid</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -18,9 +19,14 @@
       <tr>
         <td><%= link_to auction.id, auction_path(auction) %></td>
         <td><%= auction.name %></td>
+        <td><%= auction.user.name %></td>
         <td><%= auction.active %></td>
         <td><%= auction.end_time %></td>
-        <td><%= auction.user.name %></td>
+        <% if auction.highestBid!=nil %>
+            <td><%= "#{auction.highestBid.amount} by #{auction.highestBid.user.name}"%></td>
+        <% else %>
+            <td>No Bids found</td>
+        <% end %>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_auction_path(auction), :class => 'btn btn-default btn-xs' %>

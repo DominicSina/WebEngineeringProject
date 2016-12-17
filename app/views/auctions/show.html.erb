@@ -12,6 +12,8 @@
   <dd><%= @auction.active %></dd>
   <dt><strong><%= model_class.human_attribute_name(:end_time) %>:</strong></dt>
   <dd><%= @auction.end_time %></dd>
+  <dt><strong>Highest Bid:</strong></dt>
+  <dd><%= "#{@auction.highestBid.amount} by #{@auction.highestBid.user.name}"%></dd>
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
   <dd><%= @auction.user.name %></dd>
 </dl>
@@ -25,6 +27,7 @@
 </div>
 
 <hr>
+<%= link_to 'Bid on Auction', new_auction_bid_path(@auction), class: 'btn btn-primary'  %>
 <%= link_to t('.back', :default => t("helpers.links.back")),
               auctions_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
