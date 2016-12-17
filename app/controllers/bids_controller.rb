@@ -33,6 +33,7 @@ class BidsController < ApplicationController
         format.html { redirect_to @bid, notice: 'Bid was successfully created.' }
         format.json { render :show, status: :created, location: @bid }
       else
+        flash.now[:alert] = @bid.errors
         format.html { render :new }
         format.json { render json: @bid.errors, status: :unprocessable_entity }
       end
@@ -47,6 +48,7 @@ class BidsController < ApplicationController
         format.html { redirect_to @bid, notice: 'Bid was successfully updated.' }
         format.json { render :show, status: :ok, location: @bid }
       else
+        flash.now[:alert] = @bid.errors
         format.html { render :edit }
         format.json { render json: @bid.errors, status: :unprocessable_entity }
       end

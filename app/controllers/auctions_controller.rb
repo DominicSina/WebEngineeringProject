@@ -44,7 +44,8 @@ class AuctionsController < ApplicationController
           format.html { redirect_to @auction, notice: 'Auction was successfully created.' }
           format.json { render :show, status: :created, location: @auction }
         else
-          format.html { render :new }
+          flash.now[:alert] = @auction.errors
+          format.html { render :new}
           format.json { render json: @auction.errors, status: :unprocessable_entity }
         end
       end
@@ -66,6 +67,7 @@ class AuctionsController < ApplicationController
         format.html { redirect_to @auction, notice: 'Auction was successfully updated.' }
         format.json { render :show, status: :ok, location: @auction }
       else
+        flash.now[:alert] = @auction.errors
         format.html { render :edit }
         format.json { render json: @auction.errors, status: :unprocessable_entity }
       end
