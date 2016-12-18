@@ -3,7 +3,7 @@ class Auction < ApplicationRecord
   has_many :images
   has_many :bids
 
-  validates :user_id,:name,:end_time,:active, presence:true
+  validates :user_id,:name,:end_time,:active, presence:true, on: :create
   validate :end_date_cannot_be_in_the_past
   validate :has_atleast_one_image
 
@@ -17,7 +17,7 @@ class Auction < ApplicationRecord
   end
 
   def end_date_cannot_be_in_the_past
-    if(self.end_time <= Time.now)
+    if(self.end_time <= Time.now && self.active)
       self.errors.add(:end_time,"has to be in the future")
     end
   end

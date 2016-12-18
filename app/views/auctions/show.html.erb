@@ -12,8 +12,14 @@
   <dd><%= @auction.active %></dd>
   <dt><strong><%= model_class.human_attribute_name(:end_time) %>:</strong></dt>
   <dd><%= @auction.end_time %></dd>
+
   <dt><strong>Highest Bid:</strong></dt>
-  <dd><%= "#{@auction.highestBid.amount} by #{@auction.highestBid.user.name}"%></dd>
+  <% if @auction.highestBid!=nil %>
+      <dd><%= "#{@auction.highestBid.amount} by #{@auction.highestBid.user.name}"%></dd>
+  <% else %>
+      <td>No Bids found</td>
+  <% end %>
+
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
   <dd><%= @auction.user.name %></dd>
 </dl>
