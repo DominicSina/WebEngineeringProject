@@ -18,7 +18,7 @@ class Bid < ApplicationRecord
     else
       #auction has ended
       if self.auction.highestBid==self
-        return "Won auctions"
+        return "Won auction"
       else
         return "Lost auction"
       end
@@ -27,7 +27,7 @@ class Bid < ApplicationRecord
 
   def is_auction_still_active
     if !self.auction.active
-      errors.add(:auction_id, "has to reference an active auction. No betting on finished auctions possible")
+      errors.add(:auction_id, "has to reference an active auction. No bidding on finished auctions possible")
     end
   end
 
