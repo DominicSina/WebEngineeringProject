@@ -7,6 +7,24 @@ class Bid < ApplicationRecord
   validate :bigger_than_highest_bid_check
   validate :is_auction_still_active
 
+  def status
+    if self.auction.active
+      #auction is still running
+      if self.auction.highestBid==self
+        return "Top Bid"
+      else
+        return "Outbidden"
+      end
+    else
+      #auction has ended
+      if self.auction.highestBid==self
+        return "Won auctions"
+      else
+        return "Lost auction"
+      end
+    end
+  end
+
   def is_auction_still_active
     if !self.auction.active
       errors.add(:auction_id, "has to reference an active auction. No betting on finished auctions possible")

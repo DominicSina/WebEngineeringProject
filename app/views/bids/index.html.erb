@@ -1,27 +1,42 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Bids</h1>
-
-<table>
+<%- model_class = Bid -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Amount</th>
-      <th>User</th>
-      <th>Auction</th>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:amount) %></th>
+      <th>Bid status</th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:auction_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @bids.each do |bid| %>
       <tr>
+        <td><%= link_to bid.id, bid_path(bid) %></td>
         <td><%= bid.amount %></td>
-        <td><%= bid.user.email %></td>
-        <td><%= bid.auction.name %></td>
-        <td><%= link_to 'Show', bid %></td>
-        <td><%= link_to 'Edit', edit_bid_path(bid) %></td>
-        <td><%= link_to 'Destroy', bid, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= bid.status %></td>
+        <td><%= link_to bid.user.name, user_path(bid.user) %></td>
+        <td><%= link_to bid.auction.name, auction_path(bid.auction) %></td>
+        <td><%=l bid.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_bid_path(bid), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      bid_path(bid),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_bid_path,
+            :class => 'btn btn-primary' %>
