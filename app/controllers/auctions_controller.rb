@@ -24,6 +24,7 @@ class AuctionsController < ApplicationController
 
   # GET /auctions/1/edit
   def edit
+    authorize @auction
   end
 
   # POST /auctions
@@ -60,6 +61,7 @@ class AuctionsController < ApplicationController
   # PATCH/PUT /auctions/1
   # PATCH/PUT /auctions/1.json
   def update
+    authorize @auction
     if params[:auction][:images]
       params[:auction][:images].each do |uploaded_file|
         url=ImgurClient.new.uploadImage uploaded_file
@@ -82,6 +84,7 @@ class AuctionsController < ApplicationController
   # DELETE /auctions/1
   # DELETE /auctions/1.json
   def destroy
+    authorize @auction
     @auction.destroy
     respond_to do |format|
       format.html { redirect_to auctions_url, notice: 'Auction was successfully destroyed.' }

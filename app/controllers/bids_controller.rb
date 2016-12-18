@@ -20,6 +20,7 @@ class BidsController < ApplicationController
 
   # GET /bids/1/edit
   def edit
+    authorize @bid
   end
 
   # POST /bids
@@ -43,6 +44,7 @@ class BidsController < ApplicationController
   # PATCH/PUT /bids/1
   # PATCH/PUT /bids/1.json
   def update
+    authorize @bid
     respond_to do |format|
       if @bid.update(bid_params)
         format.html { redirect_to @bid, notice: 'Bid was successfully updated.' }
@@ -58,6 +60,7 @@ class BidsController < ApplicationController
   # DELETE /bids/1
   # DELETE /bids/1.json
   def destroy
+    authorize @bid
     @bid.destroy
     respond_to do |format|
       format.html { redirect_to bids_url, notice: 'Bid was successfully destroyed.' }
