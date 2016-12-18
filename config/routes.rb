@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   get 'welcome_page/welcome'
 
   #makes welcome page the root page
-  #root 'welcome_page#welcome'
-  root :to => 'users#index'
+  root 'welcome_page#welcome'
+  #root :to => 'users#index'
 
   resources :user_sessions
 
