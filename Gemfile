@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'mysql2'
 #authorization gem
 gem "pundit"
 #get sass bs required for bootswatch
