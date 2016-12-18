@@ -17,7 +17,7 @@
   <% if @auction.highestBid!=nil %>
       <dd><%= "#{@auction.highestBid.amount} by #{@auction.highestBid.user.name}"%></dd>
   <% else %>
-      <td>No Bids found</td>
+      <dd>No Bids found</dd>
   <% end %>
 
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
